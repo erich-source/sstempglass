@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sunshine Tempered Glass | Calgary's Only Curved Glass Manufacturer</title>
+<meta name="description" content="Calgary's only curved tempered glass facility. Reliable quality control and fast turnaround. 21,500 sq ft. CNC fabrication."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+/* ─── TOKENS ─── */
+:root{
+  --pearl:   #F9F7F4;
+  --cream:   #F2EFE9;
+  --linen:   #EAE4DA;
+  --white:   #FFFFFF;
+  --gold:    #B8963C;
+  --gold-lt: #F5EDD6;
+  --gold-dk: #96771E;
+  --stone:   #7A736B;
+  --ink:     #2C2A28;
+  --ink2:    #4A4642;
+  --border:  rgba(0,0,0,.08);
+  --shadow:  0 4px 24px rgba(0,0,0,.07);
+  --shadow2: 0 12px 48px rgba(0,0,0,.11);
+  --r:       10px;
+  --nav-h:   68px;
+  --serif:   'Playfair Display',Georgia,serif;
+  --sans:    'Outfit',system-ui,sans-serif;
+  --max:     1240px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);color:var(--ink);background:var(--white);line-height:1.65;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px;}
+ 
+.wrap{max-width:var(--max);margin:0 auto;padding:0 2rem;}
+ 
+/* shared typography */
+.label{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:.85rem;
+}
+.label::before{content:'';width:20px;height:1px;background:var(--gold);}
+ 
+h2.sh{
+  font-family:var(--serif);
+  font-size:clamp(1.85rem,3vw,2.6rem);
+  font-weight:500;line-height:1.18;color:var(--ink);
+  margin-bottom:.85rem;
+}
+h2.sh em{font-style:italic;color:var(--gold-dk);}
+.lead{font-size:.97rem;color:var(--stone);line-height:1.8;max-width:460px;}
+ 
+/* buttons */
+.btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:.72rem 1.8rem;border-radius:6px;
+  font-size:.86rem;font-weight:600;letter-spacing:.02em;
+  transition:all .22s;cursor:pointer;font-family:var(--sans);border:none;
+}
+.btn-gold{background:var(--gold);color:var(--white);}
+.btn-gold:hover{background:var(--gold-dk);transform:translateY(-1px);box-shadow:0 6px 18px rgba(184,150,60,.3);}
+.btn-outline{border:1.5px solid var(--ink);color:var(--ink);background:transparent;}
+.btn-outline:hover{background:var(--ink);color:var(--white);}
+.btn-outline-gold{border:1.5px solid var(--gold);color:var(--gold);background:transparent;}
+.btn-outline-gold:hover{background:var(--gold);color:var(--white);}
+ 
+/* reveal */
+.r{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease;}
+.r.in{opacity:1;transform:none;}
+ 
+/* ─── NAV ─── */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:800;
+  height:var(--nav-h);
+  background:rgba(249,247,244,.94);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  transition:box-shadow .3s;
+}
+#nav.up{box-shadow:0 2px 16px rgba(0,0,0,.07);}
+.nav-row{display:flex;align-items:center;justify-content:space-between;height:100%;}
+.nav-logo{display:flex;align-items:center;gap:10px;}
+.nav-logo img{width:36px;height:36px;object-fit:contain;}
+.logo-name{
+  font-family:var(--serif);font-size:1.05rem;font-weight:500;
+  color:var(--ink);line-height:1.1;
+}
+.logo-sub{
+  font-size:.62rem;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--gold);
+}
+.nav-links{display:flex;align-items:center;gap:2rem;}
+.nav-links a{
+  font-size:.84rem;font-weight:500;color:var(--stone);
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--ink);}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;}
+.hbg span{display:block;width:22px;height:1.5px;background:var(--ink);transition:.3s;}
+.mnav{
+  display:none;position:fixed;top:var(--nav-h);left:0;right:0;
+  background:var(--white);border-bottom:1px solid var(--border);
+  padding:1.5rem 2rem;flex-direction:column;gap:.9rem;z-index:799;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+}
+.mnav.on{display:flex;}
+.mnav a{font-size:.95rem;font-weight:500;color:var(--ink2);padding:.4rem 0;border-bottom:1px solid var(--cream);}
+ 
+/* ─── HERO ─── */
+.hero{
+  margin-top:var(--nav-h);
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:calc(100vh - var(--nav-h));
+  background: linear-gradient(135deg, rgba(249,247,244,0.8) 0%, rgba(242,239,233,0.7) 100%),
+              url('img/equipment_01.jpg') center/cover;
+  overflow:hidden;
+}
+.hero-l{
+  display:flex;align-items:center;
+  padding:4rem 3.5rem 4rem 4rem;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--gold-lt);border:1px solid rgba(184,150,60,.3);
+  color:var(--gold-dk);
+  padding:5px 14px;border-radius:50px;
+  font-size:.72rem;font-weight:700;letter-spacing:.08em;
+  margin-bottom:1.5rem;
+  animation:up .7s ease both;
+}
+.hero-eyebrow span{width:5px;height:5px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-h1{
+  font-family:var(--serif);
+  font-size:clamp(2.4rem,4.2vw,3.6rem);
+  font-weight:400;line-height:1.1;color:var(--ink);
+  margin-bottom:1.1rem;
+  animation:up .7s .1s ease both;
+}
+.hero-h1 em{font-style:italic;color:var(--gold-dk);}
+.hero-sub{
+  font-size:1rem;color:var(--stone);
+  margin-bottom:2rem;line-height:1.75;max-width:420px;
+  animation:up .7s .2s ease both;
+}
+.hero-btns{
+  display:flex;flex-wrap:wrap;gap:.75rem;
+  margin-bottom:2.5rem;
+  animation:up .7s .3s ease both;
+}
+.hero-3{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border:1px solid var(--linen);border-radius:var(--r);
+  overflow:hidden;background:var(--white);
+  animation:up .7s .4s ease both;
+}
+.h3-item{
+  padding:1.1rem .8rem;text-align:center;
+  border-right:1px solid var(--linen);
+}
+.h3-item:last-child{border-right:none;}
+.h3-n{font-family:var(--serif);font-size:1.6rem;font-weight:500;color:var(--gold-dk);line-height:1;}
+.h3-l{font-size:.72rem;color:var(--stone);margin-top:.25rem;line-height:1.3;}
+ 
+.hero-r{position:relative;overflow:hidden;}
+.hero-r img{width:100%;height:100%;object-fit:cover;transition:transform 8s ease;}
+.hero-r:hover img{transform:scale(1.04);}
+/* floating badge */
+.hero-tag{
+  position:absolute;top:1.5rem;left:1.5rem;
+  background:var(--white);
+  border-radius:8px;padding:.8rem 1rem;
+  box-shadow:var(--shadow2);
+  display:flex;align-items:center;gap:.6rem;
+}
+.htag-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;animation:pulse 2s infinite;}
+.htag-txt{font-size:.75rem;font-weight:600;color:var(--ink);}
+.htag-sub{font-size:.65rem;color:var(--stone);}
+ 
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+ 
+/* ─── TRUST BAR ─── */
+.trustbar{
+  background:var(--ink);padding:.1rem 0;
+}
+.trust-row{
+  display:flex;justify-content:center;flex-wrap:wrap;
+  divide-x:1px solid rgba(255,255,255,.1);
+}
+.trust-item{
+  display:flex;align-items:center;gap:10px;
+  padding:1rem 2rem;
+  border-right:1px solid rgba(255,255,255,.1);
+}
+.trust-item:last-child{border-right:none;}
+.ti-n{font-size:1rem;font-weight:700;color:var(--gold);font-family:var(--serif);}
+.ti-l{font-size:.72rem;color:rgba(255,255,255,.5);line-height:1.3;}
+ 
+/* ─── ABOUT ─── */
+.about{padding:5.5rem 0;background:var(--white);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.about-imgs{position:relative;min-height:480px;}
+.a-main{
+  width:82%;aspect-ratio:3/4;
+  object-fit:cover;border-radius:12px;
+  box-shadow:var(--shadow2);
+}
+.a-sub{
+  position:absolute;bottom:-1rem;right:0;
+  width:50%;aspect-ratio:4/3;
+  object-fit:cover;border-radius:10px;
+  border:4px solid var(--white);
+  box-shadow:var(--shadow2);
+}
+.a-badge{
+  position:absolute;top:1.5rem;left:-1rem;
+  background:var(--gold);color:var(--white);
+  padding:.9rem 1.1rem;border-radius:8px;
+  text-align:center;
+  box-shadow:0 8px 20px rgba(184,150,60,.3);
+}
+.ab-n{font-family:var(--serif);font-size:1.7rem;font-weight:500;line-height:1;}
+.ab-l{font-size:.63rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.85;margin-top:.1rem;}
+ 
+.about-copy p{font-size:.95rem;color:var(--stone);line-height:1.82;margin-bottom:1rem;}
+.about-copy strong{color:var(--ink);font-weight:600;}
+.checks{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem;}
+.ck{
+  display:flex;align-items:center;gap:6px;
+  font-size:.8rem;font-weight:500;color:var(--ink2);
+  background:var(--cream);
+  padding:5px 12px;border-radius:50px;
+}
+.ck::before{content:'✓';font-size:.7rem;color:var(--gold);font-weight:800;}
+ 
+/* ─── SERVICES ─── */
+.services{padding:5.5rem 0;background:var(--pearl);}
+.svc-hd{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:2.5rem;
+}
+.svc-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:auto;
+  gap:1.25rem;
+}
+.sc{
+  background:var(--white);border-radius:var(--r);
+  border:1px solid var(--border);overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:transform .28s,box-shadow .28s;
+}
+.sc:hover{transform:translateY(-4px);box-shadow:var(--shadow2);}
+.sc.big{grid-column:span 2;}
+.sc-img{overflow:hidden;flex-shrink:0;}
+.sc:not(.big) .sc-img{height:195px;}
+.sc.big .sc-img{height:270px;}
+.sc-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+.sc:hover .sc-img img{transform:scale(1.05);}
+.sc-body{padding:1.3rem 1.4rem 1.5rem;flex:1;display:flex;flex-direction:column;}
+.sc-tag{
+  font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:.5rem;
+}
+.sc-body h3{font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:.35rem;line-height:1.3;}
+.sc-body p{font-size:.83rem;color:var(--stone);line-height:1.68;flex:1;}
+.sc-arrow{
+  display:inline-flex;align-items:center;gap:5px;
+  margin-top:.9rem;font-size:.8rem;font-weight:600;color:var(--gold);
+  transition:gap .2s;
+}
+.sc:hover .sc-arrow{gap:9px;}
+ 
+/* ─── WHY ─── */
+.why{
+  padding:5.5rem 0;
+  background:var(--cream);
+}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+.why-imgs{
+  display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;
+  gap:.75rem;height:420px;border-radius:12px;overflow:hidden;
+}
+.why-imgs img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.why-imgs img:hover{transform:scale(1.03);}
+.why-imgs .span2{grid-column:span 2;}
+.why-list{display:flex;flex-direction:column;gap:.85rem;margin-top:1.8rem;}
+.wi{
+  display:flex;gap:.85rem;align-items:flex-start;
+  padding:1rem 1.1rem;
+  background:var(--white);border-radius:8px;
+  border:1px solid var(--border);
+  transition:border-color .25s,box-shadow .25s;
+}
+.wi:hover{border-color:rgba(184,150,60,.3);box-shadow:0 4px 16px rgba(184,150,60,.08);}
+.wi-ico{
+  width:34px;height:34px;flex-shrink:0;
+  background:var(--gold-lt);border-radius:7px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.95rem;
+}
+.wi-t{font-size:.88rem;font-weight:600;color:var(--ink);margin-bottom:.15rem;}
+.wi-d{font-size:.79rem;color:var(--stone);line-height:1.55;}
+ 
+/* ─── GALLERY ─── */
+.gallery{padding:5.5rem 0;background:var(--white);}
+.gal-hd{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:2rem;
+}
+.gal-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.6rem;
+}
+.gi{
+  overflow:hidden;border-radius:8px;
+  position:relative;cursor:pointer;
+  background:var(--cream);
+}
+.gi.tall{grid-row:span 2;}
+.gi.wide{grid-column:span 2;}
+.gi img{width:100%;height:100%;object-fit:cover;min-height:180px;transition:transform .5s;}
+.gi:hover img{transform:scale(1.07);}
+.gi::after{
+  content:'⤢';position:absolute;bottom:.5rem;right:.5rem;
+  width:28px;height:28px;border-radius:50%;
+  background:var(--gold);color:var(--white);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.8rem;opacity:0;transform:scale(.5);
+  transition:.25s;
+}
+.gi:hover::after{opacity:1;transform:scale(1);}
+ 
+/* lightbox */
+.lb{display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.93);align-items:center;justify-content:center;padding:2rem;}
+.lb.on{display:flex;}
+.lb img{max-width:92vw;max-height:88vh;object-fit:contain;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+.lb-x,.lb-p,.lb-n{
+  position:absolute;width:40px;height:40px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--white);font-size:1rem;cursor:pointer;transition:background .2s,border-color .2s;
+}
+.lb-x{top:1.5rem;right:1.5rem;}
+.lb-p{left:1.5rem;top:50%;transform:translateY(-50%);}
+.lb-n{right:1.5rem;top:50%;transform:translateY(-50%);}
+.lb-x:hover,.lb-p:hover,.lb-n:hover{background:rgba(184,150,60,.25);border-color:var(--gold);}
+ 
+/* ─── CTA ─── */
+.cta{
+  padding:4.5rem 0;
+  background:var(--pearl);
+  border-top:1px solid var(--linen);border-bottom:1px solid var(--linen);
+}
+.cta-in{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:2rem;flex-wrap:wrap;
+}
+.cta-txt h2{
+  font-family:var(--serif);
+  font-size:clamp(1.7rem,2.8vw,2.3rem);
+  color:var(--ink);line-height:1.2;margin-bottom:.4rem;
+}
+.cta-txt p{font-size:.9rem;color:var(--stone);}
+.cta-btns{display:flex;gap:.85rem;flex-wrap:wrap;}
+ 
+/* ─── CONTACT ─── */
+.contact{padding:5.5rem 0;background:var(--white);}
+.contact-grid{display:grid;grid-template-columns:1fr 1.55fr;gap:4.5rem;align-items:start;}
+.cl-h{
+  font-family:var(--serif);font-size:1.9rem;font-weight:400;
+  color:var(--ink);line-height:1.2;margin-bottom:.5rem;
+}
+.cl-h em{font-style:italic;color:var(--gold-dk);}
+.cl-p{font-size:.92rem;color:var(--stone);margin-bottom:2rem;line-height:1.75;}
+.c-items{display:flex;flex-direction:column;gap:1rem;}
+.ci{display:flex;align-items:center;gap:.85rem;}
+.ci-ico{
+  width:40px;height:40px;flex-shrink:0;
+  background:var(--gold-lt);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;font-size:1rem;
+}
+.ci-lbl{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);}
+.ci-val{font-size:.88rem;color:var(--ink2);}
+.c-imgs{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:1.8rem;border-radius:10px;overflow:hidden;}
+.c-imgs img{width:100%;aspect-ratio:4/3;object-fit:cover;}
+ 
+/* form */
+.cf{
+  background:var(--pearl);border:1px solid var(--linen);
+  border-radius:12px;padding:2.4rem;
+}
+.cf-h{font-size:1.2rem;font-weight:600;color:var(--ink);margin-bottom:.25rem;}
+.cf-sub{font-size:.83rem;color:var(--stone);margin-bottom:1.5rem;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;}
+.fg{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.85rem;}
+.fg label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--stone);}
+.fg input,.fg textarea,.fg select{
+  background:var(--white);border:1.5px solid var(--linen);
+  color:var(--ink);padding:.78rem .9rem;
+  font-size:.88rem;font-family:var(--sans);
+  border-radius:7px;transition:border-color .2s;outline:none;
+}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--gold);}
+.fg textarea{min-height:110px;resize:vertical;}
+.fsubmit{
+  width:100%;background:var(--gold);color:var(--white);
+  border:none;padding:.9rem;font-size:.88rem;font-weight:600;
+  border-radius:7px;cursor:pointer;transition:background .22s;
+  font-family:var(--sans);letter-spacing:.03em;
+}
+.fsubmit:hover{background:var(--gold-dk);}
+ 
+/* ─── FOOTER ─── */
+footer{background:var(--ink);color:var(--white);padding:3.5rem 0 2rem;}
+.foot-grid{
+  display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;
+  gap:2.5rem;padding-bottom:2.5rem;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  margin-bottom:2rem;
+}
+.foot-logo{display:flex;align-items:center;gap:9px;margin-bottom:.85rem;}
+.foot-logo img{width:32px;height:32px;object-fit:contain;}
+.foot-logo span{font-family:var(--serif);font-size:1.05rem;}
+.foot-desc{font-size:.82rem;color:rgba(255,255,255,.38);line-height:1.7;max-width:240px;}
+.foot-col h5{
+  font-size:.67rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.15em;color:var(--gold);margin-bottom:1rem;
+}
+.foot-col a{
+  display:block;font-size:.83rem;
+  color:rgba(255,255,255,.4);margin-bottom:.55rem;transition:color .2s;
+}
+.foot-col a:hover{color:var(--white);}
+.foot-bot{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:1rem;
+}
+.foot-copy{font-size:.76rem;color:rgba(255,255,255,.25);}
+.foot-tag{font-family:var(--serif);font-size:.8rem;font-style:italic;color:rgba(255,255,255,.25);}
+ 
+/* ─── RESPONSIVE ─── */
+@media(max-width:1024px){
+  .about-grid,.contact-grid{grid-template-columns:1fr;gap:3rem;}
+  .about-imgs{display:none;}
+  .hero{grid-template-columns:1fr;}
+  .hero-r{display:none;}
+  .hero-l{padding:3.5rem 2rem;}
+  .svc-grid{grid-template-columns:1fr 1fr;}
+  .sc.big{grid-column:span 2;}
+  .why-grid{grid-template-columns:1fr;}
+  .why-imgs{height:260px;}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:2rem;}
+}
+@media(max-width:700px){
+  :root{--nav-h:60px;}
+  .nav-links{display:none;}
+  .hbg{display:flex;}
+  section,.about,.services,.gallery,.contact,.why,.cta{padding:3.5rem 0;}
+  .svc-grid{grid-template-columns:1fr;}
+  .sc.big{grid-column:span 1;}
+  .gal-grid{grid-template-columns:repeat(2,1fr);}
+  .gi.tall{grid-row:span 1;}.gi.wide{grid-column:span 1;}
+  .trust-row{overflow-x:auto;justify-content:flex-start;flex-wrap:nowrap;}
+  .trust-item{padding:.9rem 1.4rem;white-space:nowrap;}
+  .frow{grid-template-columns:1fr;}
+  .cta-in{flex-direction:column;}
+  .foot-grid{grid-template-columns:1fr;gap:1.5rem;}
+  .gal-hd,.svc-hd{flex-direction:column;align-items:flex-start;gap:1rem;}
+}
+</style>
+</head>
+<body>
+ 
+<!-- NAV -->
+<nav id="nav">
+  <div class="wrap nav-row">
+    <a href="#" class="nav-logo">
+      <img src="img/logo.jpg" alt="Sunshine Logo"/>
+      <div>
+        <div class="logo-name">Sunshine Tempered Glass</div>
+        <div class="logo-sub">Calgary, Alberta</div>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#gallery">Projects</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="btn btn-gold" style="padding:.55rem 1.3rem">Get a Quote</a>
+    </div>
+    <button class="hbg" id="hbg" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mnav" id="mnav">
+  <a href="#about" onclick="cm()">About</a>
+  <a href="#services" onclick="cm()">Services</a>
+  <a href="#gallery" onclick="cm()">Projects</a>
+  <a href="#contact" onclick="cm()">Contact</a>
+  <a href="#contact" class="btn btn-gold" style="text-align:center;margin-top:.5rem" onclick="cm()">Get a Quote</a>
+</div>
+ 
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-l">
+    <div>
+      <div class="hero-eyebrow"><span></span>Calgary's Only Curved Glass Manufacturer</div>
+      <h1 class="hero-h1">
+        Precision Glass,<br/><em>Made in Calgary.</em>
+      </h1>
+      <p class="hero-sub">Flat & curved tempered glass, CNC fabrication, Reliable quality control and fast turnaround times - from our 21,500 sq. ft.facility.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn btn-gold">Request a Quote →</a>
+        <a href="#services" class="btn btn-outline">Our Services</a>
+      </div>
+      <div class="hero-3">
+        <div class="h3-item">
+          <div class="h3-n">21,500</div>
+          <div class="h3-l">sq. ft. Facility</div>
+        </div>
+        <div class="h3-item">
+          <div class="h3-n">5 WD</div>
+          <div class="h3-l">Tempering Turnaround</div>
+        </div>
+        <div class="h3-item">
+          <div class="h3-n">#1</div>
+          <div class="h3-l">Curved Glass<br/>in Calgary</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-r">
+    <img src="img/equipment_01.jpg" alt="Sunshine Glass Facility"/>
+    <div class="hero-tag">
+      <div>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <div class="htag-dot"></div>
+          <div class="htag-txt">Est. October 2024</div>
+        </div>
+        <div class="htag-sub">Calgary, Alberta</div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- TRUST BAR -->
+<div class="trustbar">
+  <div class="wrap">
+    <div class="trust-row">
+      <div class="trust-item">
+        <div><div class="ti-n">21,500 sq ft</div><div class="ti-l">Purpose-Built Facility</div></div>
+      </div>
+      <div class="trust-item">
+        <div><div class="ti-n">Fast</div><div class="ti-l">Turnaround Times</div></div>
+      </div>
+      <div class="trust-item">
+        <div><div class="ti-n">Only in YYC</div><div class="ti-l">Curved Tempered Glass</div></div>
+      </div>
+      <div class="trust-item">
+        <div><div class="ti-n">Local</div><div class="ti-l">Calgary Production</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-imgs r">
+        <img src="img/2026041405.png" alt="Facility" class="a-main"/>
+        <img src="img/equipment_01.jpg" alt="Equipment" class="a-sub"/>
+        <div class="a-badge">
+          <div class="ab-n">2024</div>
+          <div class="ab-l">Est. Calgary</div>
+        </div>
+      </div>
+      <div class="about-copy r" style="transition-delay:.1s">
+        <div class="label">About Us</div>
+        <h2 class="sh">Calgary's Glass<br/><em>Innovation Leader</em></h2>
+        <p>Founded in 2024, we built a 21,500 sq. ft. purpose-built facility for high-quality glass processing. The <strong>only company in Calgary</strong> producing curved tempered glass.</p>
+        <div class="checks">
+          <span class="ck">Curved Tempering Furnace</span>
+          <span class="ck">Precision CNC Cutting</span>
+          <span class="ck">Multi-Stage QC</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="svc-hd r">
+      <div>
+        <div class="label">Services</div>
+        <h2 class="sh" style="margin-bottom:0">Everything Glass</h2>
+      </div>
+    </div>
+    <div class="svc-grid r" style="transition-delay:.1s">
+ 
+      <div class="sc big">
+        <div class="sc-img">
+          <img src="img/equipment_03.jpg" alt="Curved Glass"/>
+        </div>
+        <div class="sc-body">
+          <div class="sc-tag">✦ Calgary Exclusive</div>
+          <h3>Curved Tempered Glass</h3>
+          <p>Calgary's only curved tempering. Custom radii for architectural projects.</p>
+          <a href="#contact" class="sc-arrow">Request a Quote →</a>
+        </div>
+      </div>
+ 
+      <div class="sc">
+        <div class="sc-img">
+          <img src="img/equipment_02.jpg" alt="Flat Glass"/>
+        </div>
+        <div class="sc-body">
+          <div class="sc-tag">Standard & Custom</div>
+          <h3>Flat Tempered Glass</h3>
+          <p>High-strength safety glass for windows, facades, doors &amp; partitions.</p>
+          <a href="#contact" class="sc-arrow">Get a Quote →</a>
+        </div>
+      </div>
+ 
+      <div class="sc">
+        <div class="sc-img">
+          <img src="img/equipment_013.jpg" alt="Tempering"/>
+        </div>
+        <div class="sc-body">
+          <div class="sc-tag">Fast Turnaround Times</div>
+          <h3>Glass Tempering Service</h3>
+          <p>Bring your own pre-cut glass — we temper it, often same or next day.</p>
+          <a href="#contact" class="sc-arrow">Get a Quote →</a>
+        </div>
+      </div>
+ 
+      <div class="sc">
+        <div class="sc-img">
+          <img src="img/equipment_014.jpg" alt="CNC"/>
+        </div>
+        <div class="sc-body">
+          <div class="sc-tag">Precision Engineered</div>
+          <h3>CNC Fabrication</h3>
+          <p>Computer-controlled cutting, drilling, notching &amp; edge grinding.</p>
+          <a href="#contact" class="sc-arrow">Get a Quote →</a>
+        </div>
+      </div>
+ 
+      <div class="sc">
+        <div class="sc-img">
+          <img src="img/equipment_01.jpg" alt="Custom"/>
+        </div>
+        <div class="sc-body">
+          <div class="sc-tag">Bespoke</div>
+          <h3>Custom Projects</h3>
+          <p>Specialty shapes and one-of-a-kind architectural glass solutions.</p>
+          <a href="#contact" class="sc-arrow">Get a Quote →</a>
+        </div>
+      </div>
+ 
+    </div>
+  </div>
+</section>
+ 
+<!-- WHY US -->
+<section class="why" id="why">
+  <div class="wrap">
+    <div class="why-grid">
+      <!-- Images removed -->
+      <div class="r" style="transition-delay:.1s">
+        <div class="label">Why Choose Us</div>
+        <h2 class="sh">Why Calgary Builders<br/><em>Trust Sunshine</em></h2>
+        <div class="why-list">
+          <div class="wi">
+            <div class="wi-ico">✅</div>
+            <div>
+              <div class="wi-t">Strict Quality Control</div>
+              <div class="wi-d">Multi-stage inspection at every step.</div>
+            </div>
+          </div>
+          <div class="wi">
+            <div class="wi-ico">⚡</div>
+            <div>
+              <div class="wi-t">Reliable quality control and fast turnaround times.</div>
+            </div>
+          </div>
+          <div class="wi">
+            <div class="wi-ico">🏙️</div>
+            <div>
+              <div class="wi-t">Local Calgary Production</div>
+              <div class="wi-d">Made here, delivered fast. No cross-country delays.</div>
+            </div>
+          </div>
+          <div class="wi">
+            <div class="wi-ico">🔧</div>
+            <div>
+              <div class="wi-t">Custom Fabrication</div>
+              <div class="wi-d">Curved profiles others can't do.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="gal-hd r">
+      <div>
+        <div class="label">Our Work</div>
+        <h2 class="sh" style="margin-bottom:0">Completed Projects</h2>
+      </div>
+      <p style="font-size:.87rem;color:var(--stone);max-width:220px;text-align:right;line-height:1.6">Click any photo to view full screen.</p>
+    </div>
+    <div class="gal-grid r" style="transition-delay:.1s" id="gg">
+      <div class="gi"><img src="img/Project%20Results_005.jpg" alt="Project"/></div>
+      <div class="gi"><img src="img/Project%20Results_007.jpg" alt="Project"/></div>
+      <div class="gi wide"><img src="img/Project%20Results_004.jpg" alt="Project"/></div>
+      <div class="gi"><img src="img/Project%20Results_009.jpg" alt="Project"/></div>
+      <div class="gi wide"><img src="img/Project%20Results_020.jpg" alt="Project"/></div>
+      <div class="gi tall"><img src="img/Project%20Results_021.jpg" alt="Project"/></div>
+      <div class="gi"><img src="img/Project%20Results_022.jpg" alt="Project"/></div>
+      <div class="gi wide"><img src="img/Project%20Results_024.jpg" alt="Project"/></div>
+    </div>
+  </div>
+</section>
+ 
+<!-- CTA -->
+<!-- CTA removed -->
+ 
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="r">
+        <div class="label">Contact</div>
+        <h2 class="cl-h">Let's Build<br/><em>Something Together</em></h2>
+        <p class="cl-p">Single panel or full installation — we're ready to help.</p>
+        <div class="c-items">
+          <div class="ci">
+            <div class="ci-ico">📍</div>
+            <div><div class="ci-lbl">Address</div><div class="ci-val">4435 90 Ave SE, Calgary AB T2C 2S6</div></div>
+          </div>
+          <div class="ci">
+            <div class="ci-ico">📞</div>
+            <div><div class="ci-lbl">Phone</div><div class="ci-val">403 764 6688</div></div>
+          </div>
+          <div class="ci">
+            <div class="ci-ico">✉️</div>
+            <div><div class="ci-lbl">Email</div><div class="ci-val">info@sstempglass.com</div></div>
+          </div>
+          <div class="ci">
+            <div class="ci-ico">🕐</div>
+            <div><div class="ci-lbl">Hours</div><div class="ci-val">Mon – Fri, 8:30 AM – 5:00 PM</div></div>
+          </div>
+        </div>
+        <div class="c-imgs">
+          <img src="img/equipment_02.jpg" alt="Equipment"/>
+          <img src="img/equipment_03.jpg" alt="Equipment"/>
+        </div>
+      </div>
+ 
+      <div class="cf r" style="transition-delay:.1s">
+        <div class="cf-h">Request a Quote</div>
+        <div class="cf-sub">We reply within one business day.</div>
+        <form id="qf">
+          <div class="frow">
+            <div class="fg"><label>Name *</label><input type="text" placeholder="Your name" required/></div>
+            <div class="fg"><label>Phone *</label><input type="tel" placeholder="403 764 6688" required/></div>
+          </div>
+          <div class="fg">
+            <label>Notes</label>
+            <textarea placeholder="Your requirements..."></textarea>
+          </div>
+          <button type="submit" class="fsubmit" id="fsub">Submit Inquiry →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">
+          <img src="img/logo.jpg" alt="Logo"/>
+          <span>Sunshine Tempered Glass</span>
+        </div>
+        <p class="foot-desc">Calgary's only curved tempered glass manufacturer. Purpose-built for precision and speed. Est. 2024.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#gallery">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="foot-col">
+        <h5>Services</h5>
+        <a href="#services">Curved Tempered Glass</a>
+        <a href="#services">Flat Tempered Glass</a>
+        <a href="#services">CNC Fabrication</a>
+        <a href="#services">Glass Tempering</a>
+      </div>
+      <div class="foot-col">
+        <h5>Reach Us</h5>
+        <a href="#">Calgary, Alberta</a>
+        <a href="mailto:info@sunshinetemperedglass.com">info@sunshine<br/>temperedglass.com</a>
+        <a href="#">Mon–Fri 8am–5pm</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span class="foot-copy">© 2026 Sunshine Tempered Glass Ltd.</span>
+      <span class="foot-tag">"Precision Glass, Built in Calgary."</span>
+    </div>
+  </div>
+</footer>
+ 
+<!-- LIGHTBOX -->
+<div class="lb" id="lb">
+  <div class="lb-x" id="lbx">✕</div>
+  <div class="lb-p" id="lbp">←</div>
+  <img src="" id="lbi" alt=""/>
+  <div class="lb-n" id="lbn">→</div>
+</div>
+ 
+<script>
+// Nav shadow
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('up',scrollY>30));
+ 
+// Mobile nav
+const hbg=document.getElementById('hbg'),mn=document.getElementById('mnav');
+hbg.addEventListener('click',()=>mn.classList.toggle('on'));
+function cm(){mn.classList.remove('on');}
+ 
+// Scroll reveal
+const io=new IntersectionObserver(es=>
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),
+  {threshold:.1}
+);
+document.querySelectorAll('.r').forEach(el=>io.observe(el));
+ 
+// Lightbox
+const imgs=Array.from(document.querySelectorAll('#gg .gi img'));
+let cur=0;
+const lb=document.getElementById('lb'),lbi=document.getElementById('lbi');
+function open(i){cur=i;lbi.src=imgs[i].src;lb.classList.add('on');document.body.style.overflow='hidden';}
+function close(){lb.classList.remove('on');document.body.style.overflow='';}
+function move(d){cur=(cur+d+imgs.length)%imgs.length;lbi.src=imgs[cur].src;}
+imgs.forEach((img,i)=>img.parentElement.addEventListener('click',()=>open(i)));
+document.getElementById('lbx').addEventListener('click',close);
+document.getElementById('lbp').addEventListener('click',()=>move(-1));
+document.getElementById('lbn').addEventListener('click',()=>move(1));
+lb.addEventListener('click',e=>{if(e.target===lb)close();});
+document.addEventListener('keydown',e=>{
+  if(!lb.classList.contains('on'))return;
+  if(e.key==='Escape')close();
+  if(e.key==='ArrowLeft')move(-1);
+  if(e.key==='ArrowRight')move(1);
+});
+ 
+// Form
+document.getElementById('qf').addEventListener('submit',e=>{
+  e.preventDefault();
+  const b=document.getElementById('fsub');
+  b.textContent='✓ Sent — we\'ll reply within 24 hours';
+  b.style.background='#22c55e';
+  b.disabled=true;
+});
+</script>
+</body>
+</html>

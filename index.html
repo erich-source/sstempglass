@@ -419,6 +419,9 @@ h2.sh em{font-style:italic;color:var(--gold-dk);}
   font-family:var(--sans);letter-spacing:.03em;
 }
 .fsubmit:hover{background:var(--gold-dk);}
+.qf-status{min-height:1.2em;margin-top:.75rem;font-size:.8rem;color:var(--stone);line-height:1.5;}
+.qf-status.success{color:#15803d;}
+.qf-status.error{color:#b91c1c;}
  
 /* ─── FOOTER ─── */
 footer{background:var(--ink);color:var(--white);padding:3.5rem 0 2rem;}
@@ -778,17 +781,26 @@ footer{background:var(--ink);color:var(--white);padding:3.5rem 0 2rem;}
       <div class="cf r" style="transition-delay:.1s">
         <div class="cf-h">Request a Quote</div>
         <div class="cf-sub">We reply within one business day.</div>
-        <form id="qf">
+        <form id="qf" action="https://formsubmit.co/orders@sstempglass.com" method="POST">
+          <input type="hidden" name="_subject" value="New Quote Request — Sunshine Tempered Glass"/>
+          <input type="hidden" name="_template" value="table"/>
+          <input type="hidden" name="_url" value="https://sstempglass.com/"/>
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none"/>
           <div class="frow">
-            <div class="fg"><label>Name *</label><input type="text" placeholder="Your name" required/></div>
-            <div class="fg"><label>Phone *</label><input type="tel" placeholder="403 764 6688" required/></div>
+            <div class="fg"><label for="q-name">Name *</label><input id="q-name" type="text" name="name" placeholder="Your name" autocomplete="name" required/></div>
+            <div class="fg"><label for="q-phone">Phone *</label><input id="q-phone" type="tel" name="phone" placeholder="403 764 6688" autocomplete="tel" required/></div>
           </div>
           <div class="fg">
-            <label>Notes</label>
-            <textarea placeholder="Your requirements..."></textarea>
+            <label for="q-email">Email *</label>
+            <input id="q-email" type="email" name="email" placeholder="you@example.com" autocomplete="email" required/>
+          </div>
+          <div class="fg">
+            <label for="q-notes">Notes</label>
+            <textarea id="q-notes" name="notes" placeholder="Your requirements..."></textarea>
           </div>
           <button type="submit" class="fsubmit" id="fsub">Submit Inquiry →</button>
         </form>
+        <div class="qf-status" id="qf-status" role="status" aria-live="polite"></div>
       </div>
     </div>
   </div>
@@ -822,7 +834,7 @@ footer{background:var(--ink);color:var(--white);padding:3.5rem 0 2rem;}
       <div class="foot-col">
         <h5>Reach Us</h5>
         <a href="#">Calgary, Alberta</a>
-        <a href="mailto:info@sunshinetemperedglass.com">info@sunshine<br/>temperedglass.com</a>
+          <a href="mailto:orders@sstempglass.com">orders@sstemp<br/>glass.com</a>
         <a href="#">Mon–Fri 8am–5pm</a>
       </div>
     </div>
@@ -877,13 +889,39 @@ document.addEventListener('keydown',e=>{
   if(e.key==='ArrowRight')move(1);
 });
  
-// Form
-document.getElementById('qf').addEventListener('submit',e=>{
+// FormSubmit email form
+const qf=document.getElementById('qf');
+const qfb=document.getElementById('fsub');
+const qfs=document.getElementById('qf-status');
+qf.addEventListener('submit',async e=>{
   e.preventDefault();
-  const b=document.getElementById('fsub');
-  b.textContent='✓ Sent — we\'ll reply within 24 hours';
-  b.style.background='#22c55e';
-  b.disabled=true;
+  qfb.disabled=true;
+  qfb.textContent='Sending…';
+  qfb.style.background='';
+  qfs.textContent='';
+  qfs.className='qf-status';
+  const payload=Object.fromEntries(new FormData(qf).entries());
+  try{
+    const response=await fetch('https://formsubmit.co/ajax/orders@sstempglass.com',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify(payload)
+    });
+    const result=await response.json().catch(()=>({}));
+    if(!response.ok||result.success===false||result.success==='false'){
+      throw new Error(result.message||'Unable to submit inquiry');
+    }
+    qfb.textContent='✓ Sent — we\'ll reply within 24 hours';
+    qfb.style.background='#22c55e';
+    qfs.textContent='Thanks! Your inquiry has been sent.';
+    qfs.className='qf-status success';
+    qf.reset();
+  }catch(error){
+    qfb.disabled=false;
+    qfb.textContent='Try again →';
+    qfs.textContent='We could not send your inquiry. Please email orders@sstempglass.com directly.';
+    qfs.className='qf-status error';
+  }
 });
 </script>
 </body>
